@@ -1,7 +1,24 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { api } from "../config_axios";
+
 
 const cadastrar_prestador = () =>{
 
+  const { register, handleSubmit,reset } = useForm();
+    const [aviso, setAviso] = useState("");
+  
+    const salvar = async (campos) => {
+      try {
+        console.log(campos)
+        const response = await api.post("/prestador", campos);
+        setAviso(`Prestador cadastrado com sucesso!"`);
+        reset();
+      } catch (error) {
+        setAviso("Erro ao cadastrar prestador!");
+      }
+    };
 
     const handleCPF = (event) => {
         function cpfMask(value){
@@ -19,22 +36,23 @@ const cadastrar_prestador = () =>{
         let input = event.target;
         input.value = cpfMask(input.value);
       };
+      
 
-      const handleTelefone = (event) => {
-        function telefoneMask(value){
-          if (!value) return "";
-          value = value.replace(/\D/g,'');
-          if(value.length <= 8){
-            value = value.replace(/^(\d{2})(\d)/, '($1) $2');
-          } else{
-            value = value.replace(/^(\d{2})(\d{5})(\d)/, '($1) $2-$3');
-          };
+      // const handleTelefone = (event) => {
+      //   function telefoneMask(value){
+      //     if (!value) return "";
+      //     value = value.replace(/\D/g,'');
+      //     if(value.length <= 8){
+      //       value = value.replace(/^(\d{2})(\d)/, '($1) $2');
+      //     } else{
+      //       value = value.replace(/^(\d{2})(\d{5})(\d)/, '($1) $2-$3');
+      //     };
         
-          return value;
-        }
-        let input = event.target;
-        input.value = telefoneMask(input.value);
-      };
+      //     return value;
+      //   }
+      //   let input = event.target;
+      //   input.value = telefoneMask(input.value);
+      // };
 
 
   return(
@@ -61,37 +79,43 @@ const cadastrar_prestador = () =>{
             <span>OU</span>
         </div>
 
-        <form action="">
+        <form onSubmit={handleSubmit(salvar)}>
 
           <div className="wrapper"> 
 
-            <label htmlFor="name">
+            <label htmlFor="prestador_nome">
                 <span>Nome</span>
-                <input type="text" id="name" name="name" placeholder="Nome"/>
+                <input type="text" id="prestador_nome" name="prestador_nome" placeholder="Nome" {...register("prestador_nome")}/>
             </label>
 
             
-            <label htmlFor="email">
+            <label htmlFor="prestador_email">
                 <span>E-mail</span>
-                <input type="email" id="email" name="email" placeholder="exemplo@gmail.com"/>
+                <input type="email" id="prestador_email" name="prestador_email" placeholder="exemplo@gmail.com" {...register("prestador_email")}/>
             </label>
 
-            <label htmlFor="cpf">
+            <label htmlFor="prestador_cpf">
                 <span>Cpf</span>
                 <input type="cpf" 
-                id="cpf" 
-                name="cpf" 
-                placeholder="000-000-000-00" 
+                id="prestador_cpf" 
+                name="prestador_cpf" 
+                placeholder="000.000.000-00" 
                 onKeyUp={handleCPF} 
-                maxLength={14}/>
+                maxLength={11}
+                {...register("prestador_cpf")}/>
             </label>
 
-            <label htmlFor="data_nascimento">
-                <span>data nascimento</span>
-                <input type="date" id="data_nascimento" name="data nascimento" placeholder="dd/mm/aa"/>
+            <label htmlFor="prestador_cnpj">
+                <span>Cnpj</span>
+                <input type="Cnpj" id="prestador_cnpj" name="prestador_cnpj" placeholder="XX. XXX. XXX/0001-XX" {...register("prestador_cnpj")}/>
             </label>
 
-            <label htmlFor="Telefone">
+            <label htmlFor="prestador_razao_social">
+                <span>Razao Social</span>
+                <input type="Razao_social" id="prestador_razao_social" name="prestador_razao_social" placeholder="Nome da empresa" {...register("prestador_razao_social")}/>
+            </label>
+
+            {/* <label htmlFor="Telefone">
                 <span>Telefone</span>
                 <input type="telefone" 
                 id="telefone" 
@@ -99,11 +123,11 @@ const cadastrar_prestador = () =>{
                 placeholder="(00)00000-0000" 
                 onKeyUp={handleTelefone}
                 maxLength={15}/>
-            </label>
+            </label> */}
 
-            <label htmlFor="password">
+            <label htmlFor="prestador_senha">
                 <span>Senha</span>
-                <input type="password" id="password" name="password" placeholder="senha"/>
+                <input type="password" id="prestador_senha" name="prestador_senha" placeholder="senha" {...register("prestador_senha")}/>
             </label>
 
 

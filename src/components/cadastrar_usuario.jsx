@@ -4,6 +4,7 @@ import { useState } from "react";
 import { api } from "../config_axios";
 
 const cadastrar_usuario = () =>{
+  
     const { register, handleSubmit,reset } = useForm();
     const [aviso, setAviso] = useState("");
   
@@ -81,7 +82,7 @@ const cadastrar_usuario = () =>{
                 name="usuario_cpf" 
                 placeholder="000-000-000-00" 
                 onKeyUp={handleCPF} 
-                maxLength={14}
+                maxLength={11}
                 {...register("usuario_cpf")}/>
             </label>
 
