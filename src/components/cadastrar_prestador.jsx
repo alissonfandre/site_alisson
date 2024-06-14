@@ -101,7 +101,7 @@ const cadastrar_prestador = () =>{
                 name="prestador_cpf" 
                 placeholder="000.000.000-00" 
                 onKeyUp={handleCPF} 
-                maxLength={11}
+                maxLength={14}
                 {...register("prestador_cpf")}/>
             </label>
 

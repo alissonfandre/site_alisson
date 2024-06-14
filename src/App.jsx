@@ -4,6 +4,7 @@ import Manutencao_Tarefas from './components/manutencao_tarefas';
 import FormularioLogin from './components/login';
 import Cadastrar_Usuarios from './components/cadastrar_usuario';
 import Agendar_Servicos from "./components/agendar_servicos";
+import Home from './components/home';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider, useAuth } from './components/AuthProvider';
@@ -11,6 +12,7 @@ import './css/index.css';
 import './css/cadastro.css';
 import './css/prestador.css';
 import './css/agendar.css';
+import './css/home.css';
 
 
 
@@ -32,6 +34,9 @@ const RoutesWithAuth = () => {
                 <Route path="/agendar" element={<Agendar_Servicos />} />
                 <Route path="/manutencao" element={<ProtectedRoute><Manutencao_Tarefas /></ProtectedRoute>} />
                 <Route path="/user" element={<Cadastrar_Usuarios />} />
+                <Route path="/home" element={<Home/>} />
+                
+
             </Routes>
         </Router>
     );

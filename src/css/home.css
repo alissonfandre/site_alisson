@@ -1,0 +1,125 @@
+.banana {
+  margin: 0;
+  padding: 0;
+}
+
+.banana html,
+.banana body {
+  background: #303030;
+  color: #303030;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  font: normal 1em "Arial";
+}
+
+.banana nav {
+  padding: 10px;
+  position: relative;
+  background: #4deb5a;
+  z-index: 1;
+}
+
+.banana nav::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.banana aside {
+  position: absolute;
+  width: 300px;
+  height: 100%;
+  background: #383838;
+  left: -300px;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  padding-top: 70px;
+  transition: all 0.4s ease;
+}
+
+.banana aside.active {
+  left: 0;
+}
+
+.banana aside a {
+  display: block;
+  padding: 1.2rem;
+  text-decoration: none;
+  font-size: 1rem;
+  color: #818181;
+  border-bottom: 1px solid #414141;
+}
+
+.banana .toggle-wrap {
+  padding: 10px;
+  position: relative;
+  cursor: pointer;
+  float: left;
+  
+  /*disable selection*/
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.banana .toggle-bar,
+.banana .toggle-bar::before,
+.banana .toggle-bar::after,
+.banana .toggle-wrap.active .toggle-bar,
+.banana .toggle-wrap.active .toggle-bar::before,
+.banana .toggle-wrap.active .toggle-bar::after {
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.banana .toggle-bar {
+  width: 38px;
+  margin: 10px 0;
+  position: relative;
+  border-top: 6px solid #303030;
+  display: block;
+}
+
+.banana .toggle-bar::before,
+.banana .toggle-bar::after {
+  content: "";
+  display: block;
+  background: #303030;
+  height: 6px;
+  width: 38px;
+  position: absolute;
+  top: -16px;
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -ms-transform-origin: 13%;
+  -webkit-transform-origin: 13%;
+  transform-origin: 13%;
+}
+
+.banana .toggle-bar::after {
+  top: 4px;
+}
+
+.banana .toggle-wrap.active .toggle-bar {
+  border-top: 6px solid transparent;
+}
+
+.banana .toggle-wrap.active .toggle-bar::before {
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.banana .toggle-wrap.active .toggle-bar::after {
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
