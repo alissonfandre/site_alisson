@@ -1,23 +1,26 @@
 .banana {
   margin: 0;
   padding: 0;
+  height: 100vh; /* Define a altura da página para ocupar toda a viewport */
+  overflow-x: hidden; /* Impede o overflow horizontal */
 }
 
-.banana html,
 .banana body {
   background: #303030;
-  color: #303030;
-  height: 100%;
-  width: 100%;
-  position: absolute;
+  color: #ffffff; /* Cor de texto alterada para melhor contraste */
   font: normal 1em "Arial";
+  margin: 0; /* Remove margens padrão do body */
+  padding: 0; /* Remove padding padrão do body */
 }
 
 .banana nav {
   padding: 10px;
-  position: relative;
+  position: fixed; /* Fixa o nav na parte superior da janela */
+  top: 0;
+  left: 0;
+  width: 5,5%; /* Ocupa toda a largura */
   background: #4deb5a;
-  z-index: 1;
+  z-index: 1000; /* Z-index alto para garantir que fique acima de outros elementos */
 }
 
 .banana nav::after {
@@ -57,7 +60,7 @@
   position: relative;
   cursor: pointer;
   float: left;
-  
+
   /*disable selection*/
   -webkit-touch-callout: none;
   -webkit-user-select: none;

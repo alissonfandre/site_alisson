@@ -11,16 +11,19 @@ const Home = () => {
   
     return (
       <div className="banana">
+
         <nav>
           <div className={`toggle-wrap ${menuActive ? 'active' : ''}`} onClick={toggleMenu}>
             <span className="toggle-bar"></span>
           </div>
         </nav>
+        
         <aside className={menuActive ? 'active' : ''}>
         <Link to="/">Home</Link>
         <Link to="/services">Services</Link>
         <Link to="/about">About</Link>
         </aside>
+
       </div>
     );
   };
