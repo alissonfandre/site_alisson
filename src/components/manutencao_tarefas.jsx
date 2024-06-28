@@ -90,7 +90,7 @@ const alterar = async (id,titulo,index) => {
                 </form>
             </div>
         </div>
-
+        
         <table className="table table-striped mt-3">
             <thead>
                 <tr>

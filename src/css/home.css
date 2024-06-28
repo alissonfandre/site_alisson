@@ -1,18 +1,21 @@
-.banana {
-  margin: 0;
-  padding: 0;
-  height: 100vh; /* Define a altura da página para ocupar toda a viewport */
-  overflow-x: hidden; /* Impede o overflow horizontal */
+body{
+  justify-content: center;
 }
 
+
+.banana {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  height: 1vh;
+}
 .banana body {
   background: #303030;
   color: #ffffff; /* Cor de texto alterada para melhor contraste */
   font: normal 1em "Arial";
   margin: 0; /* Remove margens padrão do body */
-  padding: 0; /* Remove padding padrão do body */
+  padding: 8; /* Remove padding padrão do body */
 }
-
 .banana nav {
   padding: 10px;
   position: fixed; /* Fixa o nav na parte superior da janela */
@@ -125,4 +128,57 @@
   -ms-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
+}
+
+.figure {
+  display: flex;
+  justify-content: 20px; /* Alinha os elementos à esquerda */
+  align-items: center; /* Centraliza os elementos verticalmente */
+  padding-left: 20px; /* Adiciona um espaçamento à esquerda */
+  margin-left: center; /* Desloca o .figure para a esquerda */
+}
+
+.figure figure {
+  display: grid;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  margin: 20px; /* Espaçamento entre as figuras */
+}
+
+.figure figure > * {
+  grid-area: 1/1;
+  transition: .4s;
+}
+
+.figure figure figcaption {
+  display: grid;
+  align-items: end;
+  font-family: sans-serif;
+  font-size: 2.3rem;
+  font-weight: bold;
+  color: #000; /* Corrected color to black */
+  padding: 0.75rem;
+  background: var(--c, rgba(0, 0, 0, 0.6)); /* Corrected background with alpha transparency */
+  clip-path: inset(0 var(--_i, 100%) 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0),
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  -webkit-mask-clip: text, padding-box;
+  margin: -1px;
+}
+.figure figure:hover figcaption {
+  --_i: 0%;
+}
+
+.figure figure:hover img {
+  transform: scale(1.2);
+}
+
+@supports not (-webkit-mask-clip: text) {
+  .figure figure figcaption {
+    -webkit-mask: none;
+    color: #fff;
+  }
 }
