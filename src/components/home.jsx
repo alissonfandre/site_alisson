@@ -42,7 +42,7 @@ const Home = () => {
 
       <figure style={{ "--c": "#fff5" }}>
         <img src="https://picsum.photos/id/475/250/300" alt="Mountains" />
-        <figcaption>papapap</figcaption>
+        <figcaption>Yasmin bolla</figcaption>
       </figure>
 
       <figure style={{ "--c": "#fff5" }}>
