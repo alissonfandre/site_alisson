@@ -4,39 +4,6 @@ const agendar_servicos = () =>{
 
 
 
-    const handleCPF = (event) => {
-        function cpfMask(value){
-          if (!value) return "";
-          value = value.replace(/\D/g,'');
-          if(value.length <= 6){
-            value = value.replace(/^(\d{3})(\d)/, '$1.$2');
-          } else if (value.length <= 9){
-            value = value.replace(/^(\d{3})(\d{3})(\d)/, '$1.$2.$3');
-          } else {
-            value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d)/, '$1.$2.$3-$4');
-          };
-          return value;
-        }
-        let input = event.target;
-        input.value = cpfMask(input.value);
-      };
-
-      const handleTelefone = (event) => {
-        function telefoneMask(value){
-          if (!value) return "";
-          value = value.replace(/\D/g,'');
-          if(value.length <= 8){
-            value = value.replace(/^(\d{2})(\d)/, '($1) $2');
-          } else{
-            value = value.replace(/^(\d{2})(\d{5})(\d)/, '($1) $2-$3');
-          };
-        
-          return value;
-        }
-        let input = event.target;
-        input.value = telefoneMask(input.value);
-      };
-
 
   return(
     <body>
