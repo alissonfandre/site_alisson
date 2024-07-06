@@ -4,15 +4,17 @@ import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Helmet } from "react-helmet";
+import React from 'react';
 
-const agendamento_servicos = () => {
+const AgendamentoServicos = () => {
     const { register, handleSubmit, reset, watch } = useForm();
     const [aviso, setAviso] = useState("");
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate, setSelectedDate] = React.useState(null);
     const [selectedTime, setSelectedTime] = useState("00:00");
     const [servicos, setServicos] = useState([]);
     const [prestadores, setPrestadores] = useState([]);
     const [selectedServicoNome, setSelectedServicoNome] = useState("");
+    const [inputDate, setInputDate] = React.useState('');
 
     useEffect(() => {
         const fetchServicos = async () => {
@@ -34,7 +36,6 @@ const agendamento_servicos = () => {
             const response = await api.get(`/prestador/search?servicoNome=${servicoNome}`);
             setPrestadores(response.data);
             console.log(response.data);
-
         } catch (error) {
             console.error("Erro ao buscar prestadores por nome do serviço", error);
         }
@@ -44,7 +45,8 @@ const agendamento_servicos = () => {
         console.log("Event target value:", event.target.value);
         console.log("Servicos array:", servicos); // Log do array servicos
 
-        const servicoEncontrado = servicos.find(servico => servico.servico_id === parseInt(event.target.value, 10)); console.log("Servico encontrado:", servicoEncontrado); // Log do serviço encontrado
+        const servicoEncontrado = servicos.find(servico => servico.servico_id === parseInt(event.target.value, 10));
+        console.log("Servico encontrado:", servicoEncontrado); // Log do serviço encontrado
 
         const servicoNome = servicoEncontrado?.servico_nome;
         console.log("Servico Nome:", servicoNome);
@@ -76,88 +78,134 @@ const agendamento_servicos = () => {
         console.log("Servicos:", servicos);
     }, [servicos]);
 
-    return (
+    const handleDateChangeRaw = (e) => {
+        const { value } = e.target;
+        let formattedValue = value;
 
+        if (value.length === 8) {
+            formattedValue = `${value.substring(0, 2)}/${value.substring(2, 4)}/${value.substring(4, 8)}`;
+        }
+
+        setInputDate(formattedValue);
+    };
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+    };
+
+    return (
         <>
             <Helmet>
                 <title>Agendamento</title>
             </Helmet>
-            <div className="container p-5 bg-light text-dark rounded" style={{ borderColor: "#4e9c9c", borderWidth: "20px", borderStyle: "solid" }}>
-                <div className="container p-5 bg-light text-dark rounded">
-                    <h4 className="fst-italic mb-3">Agendamento</h4>
+
+            <div className="agendamento-container">
+                <div className="agendamento-form">
+                    <h4 className="agendamento-title">Agende um serviço</h4>
+
                     <form onSubmit={handleSubmit(salvar)}>
-                        <div className="input-group mb-3">
+
+                        <div className="agendamento-input-container">
                             <input
-                                className="form-control"
+                                className="agendamento-input"
                                 type="search"
                                 placeholder="Serviços"
                                 aria-label="Serviços"
                                 {...register("servicoNome")}
                             />
                             <button
-                                className="btn btn-outline-success"
+                                className="agendamento-button"
                                 type="button"
                                 onClick={() => buscarPrestadoresPorNomeServico(watch("servicoNome"))}
                             >
                                 Pesquisar
                             </button>
                         </div>
-                        <select
-                            className="form-select"
-                            aria-label="Default select example"
-                            {...register("servico_id")}
-                            defaultValue=""
-                            onChange={handleServicoChange}
-                        >
-                            <option value="" disabled>Selecione um serviço</option>
-                            {servicos.map(servico => (
-                                <option key={servico.servico_id} value={servico.servico_id}>{servico.servico_nome}</option>
-                            ))}
-                        </select>
-                        <br />
-                        <select className="form-select" aria-label="Prestadores" {...register("prestador_id")} defaultValue="" disabled={!selectedServicoNome}>
-                            <option value="" disabled>Selecione um prestador</option>
-                            {prestadores.map((prestador) => (
-                                <option key={prestador.prestador_id} value={prestador.prestador_id}>{prestador.prestador_nome}</option>
-                            ))}
-                        </select>
-                        <br />
-                        <div>
-                            <label>Escolha a data que você deseja agendar o Serviço:</label>
-                            <br />
-                            <DatePicker
-                                selected={selectedDate}
-                                onChange={(date) => setSelectedDate(date)}
-                                dateFormat="dd/MM/yyyy"
-                                className="form-control"
-                            />
-                        </div>
-                        <br />
-                        <h6>Selecione um horário:</h6>
-                        <div className="input-group mb-3">
-                            <input
-                                type="time"
-                                className="form-control"
-                                value={selectedTime}
-                                onChange={(e) => setSelectedTime(e.target.value)}
-                            />
-                        </div>
-                        <br />
-                        <button type="submit" className="btn btn-primary">Agendar</button>
 
-                        <section className="images">
-                            <img src={'cara da lupa.svg'} alt="Mobile" />
-                            <div className="circle"></div>
-                        </section>
+                        <label>
+                            <select
+                                className="agendamento-select"
+                                aria-label="Default select example"
+                                {...register("agendamento_servico_id")}
+                                defaultValue=""
+                                onChange={handleServicoChange}
+                            >
+                                <option value="" disabled>Selecione um serviço</option>
+                                {servicos.map(servico => (
+                                    <option key={servico.servico_id} value={servico.servico_id}>{servico.servico_nome}</option>
+                                ))}
+                            </select>
+                        </label>
+
+                        <label>
+
+                            <select
+                                className="agendamento-select"
+                                aria-label="Selecionar Prestador"
+                                {...register("prestador_id")}
+                                defaultValue=""
+                                disabled={!selectedServicoNome}
+                            >
+                                <option value="" disabled>Selecione um prestador</option>
+                                {prestadores.map((prestador) => (
+                                    <option key={prestador.prestador_id} value={prestador.prestador_id}>{prestador.prestador_nome}</option>
+                                ))}
+                            </select>
+                        </label>
+
+                        <br />
+
+                        <label>
+                            <span>Data serviço</span>
+
+                            <div>
+                                <DatePicker
+                                    selected={selectedDate}
+                                    onChange={handleDateChange}
+                                    onChangeRaw={handleDateChangeRaw}
+                                    dateFormat="dd/MM/yyyy"
+                                    value={inputDate}
+                                    placeholderText="dd/mm/yyyy"
+                                    className="agendamento-input"
+                                />
+
+                            </div>
+
+                        </label>
+
+                        <label>
+                            <h6>Selecione um horário:</h6>
+
+                            <div className="agendamento-input-container">
+                                <input
+                                    type="time"
+                                    className="agendamento-input"
+                                    value={selectedTime}
+                                    onChange={(e) => setSelectedTime(e.target.value)}
+                                />
+                            </div>
+                        </label>
+
+                        <br />
+
+                        <button type="submit" className="agendamento-submit">Agendar</button>
 
                     </form>
-                    <div className="alert mt-3">{aviso}</div>
+
+                    <div className="agendamento-alert">{aviso}</div>
+
                 </div>
+
+
+                <section className="images">
+                    <img src={'cara da lupa.svg'} alt="Mobile" />
+                    <div className="circle"></div>
+                </section>
+
             </div>
 
         </>
-
     );
 };
 
-export default agendamento_servicos;
+export default AgendamentoServicos;

@@ -3,151 +3,126 @@
 * {
     margin: 0;
     padding: 0;
-    border: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
-body {
-    background: #201b2c;
-    color: white;
-    font-weight: 500;
+.agendamento-container {
     display: flex;
-    min-height: 100vh;  /* Set min-height to 100vh for viewport height */
-    overflow: hidden;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
+    justify-content: space-between; /* Ajuste para distribuir o espaço entre os elementos */
     align-items: center;
-    justify-content: center;
-    padding: 0 2rem;  /* Add some horizontal padding for better spacing */
+    min-height: 100vh;
+    background-color: #201b2c;
+    color: #00ff88;
+    font-weight: 500;
+    font-size: 16px;
 }
 
-main h1 {
+.agendamento-form {
+    width: 100%;
+    max-width: 400px; /* Reduzi a largura do formulário */
+    padding: 20px;
+    margin-left: -300px; /* Margem à esquerda para afastar do lado esquerdo */
+}
+
+.agendamento-title {
     color: #00ff88;
-    font-size: 3rem;
-    margin-bottom: 2.5rem;
+    font-size: 2rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
-main .alternative {
-    margin-top: 1rem;
-    margin-left: auto;
-}
-
-@media (max-width: 450px) {
-    main .social-media img {
-        width: 1.5rem;
-        margin-left: 2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    main h1 {
-        font-size: 2.5rem;
-    }
-}
-
-
-main .alternative span {
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: #00ff88;
-    position: relative;
-}
-
-main .alternative span::before, main .alternative span::after {
-    position: absolute;
-    content: '';
-    height: 1px;
-    width: 100px;
-    bottom: 50%;
-    right: 50px;
-    background: #00ff88;
-}
-
-main .alternative span::after {
-    left: 50px;
-}
-
-main form {
+.agendamento-input-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    width: 100%;
-    max-width: 400px;
-}
-
-main form label {
-    display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     margin-bottom: 1rem;
 }
 
-main form label span {
-    font-size: 17px;
-    margin-top: 2rem;
-}
-
-main form input {
-    background: #514869;
-    width: 100%;
+.agendamento-input {
+    flex: 1;
     height: 40px;
-    padding: 0 0.5rem;
-    margin-top: 0rem;
-    margin-bottom: 10%;
-    outline: none;
+    padding: 0.5rem;
+    background-color: #514869;
     color: rgba(166, 166, 166);
     font-size: 1rem;
     border: 1px solid #1a1b1b;
     border-radius: 8px;
-}
-
-.classe select {
-    background: #514869;
-    width: 100%;
-    height: 40px;
-    padding: 0 0.5rem;
-    margin-top: 0rem;
-    margin-bottom: 10%;
     outline: none;
-    color: rgba(166, 166, 166);
-    font-size: 1rem;
-    border: 1px solid #1a1b1b;
-    border-radius: 8px;
 }
 
-main form input[type="submit"] {
+.agendamento-button {
+    height: 40px;
+    padding: 0 1rem;
+    background-color: #09e07c;
+    color: #000;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    width: 80%;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.agendamento-button:hover {
+    background-color: #09b363;
+}
+
+.agendamento-select {
+    width: 100%;
+    height: 40px;
+    padding: 0.5rem;
+    background-color: #514869;
+    color: rgba(166, 166, 166);
+    font-size: 1rem;
+    border: 1px solid #1a1b1b;
+    border-radius: 8px;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-top: 1rem;
+}
+
+.agendamento-submit {
+    width: 100%;
+    height: 40px;
     margin-top: 1rem;
     border: none;
     border-radius: 32px;
     background: #09e07c;
-    color: rgb(0, 0, 0);
-    font-size: 1.1rem;
-    transition: all .3s ease-in-out;
+    color: #000;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
 }
 
-main form input[type="submit"]:hover {
+.agendamento-submit:hover {
     background: #09b363;
 }
 
-section.images {
-    width: 50vw;
+.agendamento-alert {
+    margin-top: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.images {
+    flex: 1; /* Ocupa todo o espaço disponível */
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
     padding: 4rem;
+    position: relative;
 }
 
-section.images img {
+.images img {
     width: 100%;
+    max-width: 600px; /* Ajuste o tamanho conforme necessário */
 }
 
-section.images .circle {
+.images .circle {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -156,53 +131,4 @@ section.images .circle {
     background: linear-gradient(45deg, #E8CBC0, #636FA4);
     clip-path: circle(40% at right 80%);
     z-index: -1;
-}
-
-@media only screen and (min-width: 900px) and (max-width: 1200px) {
-    section.images img {
-        width: 110%;
-    }
-
-    section.images .circle {
-        clip-path: circle(35% at right 80%);
-    }
-}
-
-@media only screen and (max-width: 900px) {
-    section.images {
-        display: none;
-        visibility: hidden;
-    }
-
-    main {
-        width: 104vw;
-    }
-}
-
-@media only screen and (max-width: 450px) {
-    main h1 {
-        font-size: 2rem;
-    }
-
-    main .alternative span {
-        font-size: 100%;
-    }
-
-    main form label span, main form input[type="submit"] {
-        font-size: 100%;
-    }
-
-
-}
-
-@media only screen and (max-width: 450px) {
-    main form input[type="submit"] {
-        width: 80%;
-        margin-bottom: 100%;
-    }
-}
-
-.wrapper{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
 }

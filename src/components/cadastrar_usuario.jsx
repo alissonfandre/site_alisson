@@ -82,7 +82,7 @@ const cadastrar_usuario = () =>{
                 name="usuario_cpf" 
                 placeholder="000-000-000-00" 
                 onKeyUp={handleCPF} 
-                maxLength={11}
+                maxLength={14}
                 {...register("usuario_cpf")}/>
             </label>
 
