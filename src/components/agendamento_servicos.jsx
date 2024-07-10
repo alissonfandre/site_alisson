@@ -44,29 +44,50 @@ const AgendamentoServicos = () => {
     const handleServicoChange = (event) => {
         console.log("Event target value:", event.target.value);
         console.log("Servicos array:", servicos); // Log do array servicos
-
-        const servicoEncontrado = servicos.find(servico => servico.servico_id === parseInt(event.target.value, 10));
-        console.log("Servico encontrado:", servicoEncontrado); // Log do serviço encontrado
-
+    
+         const servicoEncontrado = servicos.find(servico => servico.servico_id === parseInt(event.target.value, 10));        
+         console.log("Servico encontrado:", servicoEncontrado); // Log do serviço encontrado
+    
         const servicoNome = servicoEncontrado?.servico_nome;
         console.log("Servico Nome:", servicoNome);
-
-        setSelectedServicoNome(servicoNome);
-        console.log("Selected Servico Nome:", selectedServicoNome); // Log do estado selectedServicoNome
-
-        buscarPrestadoresPorNomeServico(servicoNome);
+    
+        setSelectedServicoNome(event.target.value);
+        
+        buscarPrestadoresPorNomeServico(event.target.value);
     };
+
 
     const salvar = async (campos) => {
         try {
             // Adiciona os campos agendamento_hora e agendamento_servico_id ao objeto campos
             const camposCompletos = {
-                ...campos,
+                 ...campos,
                 agendamento_hora: selectedTime,
-                servicos: { servico_id: watch("servico_id") }
+                agendamento_data: "2024-05-09",
+                servico:{
+                    
+                    servico_id:watch("agendamento_servico_id")
+                }
+               
+
+                // agendamento_hora: selectedTime,
+                // agendamento_servico_id: { servico_id: watch("servico_id") },
+                // agendamento_usuario_id: { usuario_id : 1},
+                // agendamento_observacao: 'leite'
+    //             "agendamento_data": "2024-05-09",
+    // "agendamento_hora": "22:00",
+    // "agendamento_observacao":"bunda",
+    // "agendamento_status":"PENDENTE",
+    // "agendamento_usuario_id":{
+    //     "usuario_id": 1
+    // },
+    // "agendamento_servico_id":{
+    //     "servico_id": 2
+    // }
             };
 
-            const response = await api.post("agendamento", camposCompletos);
+            console.log("camposCompletos"+camposCompletos);
+            const response = await api.post("/agendamento", camposCompletos);
             setAviso("Agendamento realizado com sucesso!");
             reset();
         } catch (error) {
@@ -101,7 +122,7 @@ const AgendamentoServicos = () => {
 
             <div className="agendamento-container">
                 <div className="agendamento-form">
-                    <h4 className="agendamento-title">Agende um serviço</h4>
+                    <h4 className="agendamento-title">Agendamento</h4>
 
                     <form onSubmit={handleSubmit(salvar)}>
 
@@ -161,7 +182,7 @@ const AgendamentoServicos = () => {
                             <div>
                                 <DatePicker
                                     selected={selectedDate}
-                                    onChange={handleDateChange}
+                                    onChange={(date) => setSelectedDate(date)}
                                     onChangeRaw={handleDateChangeRaw}
                                     dateFormat="dd/MM/yyyy"
                                     value={inputDate}

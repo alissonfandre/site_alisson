@@ -33,7 +33,7 @@ const RoutesWithAuth = () => {
                 <Route path="/prestador" element={<Cadastrar_Prestador />} />
                 <Route path="/agendar" element={<Agendamento_servicos />} />
                 <Route path="/manutencao" element={<ProtectedRoute><Manutencao_Tarefas /></ProtectedRoute>} />
-                <Route path="/user" element={<Cadastrar_Usuarios />} />
+                <Route path="/usuario" element={<Cadastrar_Usuarios />} />
                 <Route path="/home" element={<Home/>} />
                 
 

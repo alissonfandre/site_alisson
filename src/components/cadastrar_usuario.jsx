@@ -11,7 +11,7 @@ const cadastrar_usuario = () =>{
     const salvar = async (campos) => {
       try {
         console.log(campos)
-        const response = await api.post("/usuarios", campos);
+        const response = await api.post("/usuario", campos);
         setAviso(`Usuário cadastrado com sucesso!"`);
         reset();
       } catch (error) {

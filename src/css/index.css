@@ -1,72 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+NKo+Unjoined:wght@400;600&display=swap');
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+    color: #535bf2;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-size: 3.2em;
+    line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+    border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+    }
+
+    a:hover {
+        color: #747bff;
+    }
+
+    button {
+        background-color: #f9f9f9;
+    }
 }
 
 
@@ -98,7 +103,7 @@ body * {
     flex-direction: column;
 }
 
-.left-login > h1 {
+.left-login>h1 {
     font-size: 3vw;
     color: #77ffc0;
 }
@@ -136,7 +141,7 @@ body * {
     box-shadow: 0px 10px 40px #00000056;
 }
 
-.card-login > h1 {
+.card-login>h1 {
     color: #00ff88;
     font-weight: 800;
     margin: 0;
@@ -151,7 +156,7 @@ body * {
     margin: 10px 0px;
 }
 
-.textfield > input {
+.textfield>input {
     width: 100%;
     border: none;
     border-radius: 10px;
@@ -164,12 +169,12 @@ body * {
     box-sizing: border-box;
 }
 
-.textfield > label {
+.textfield>label {
     color: #f0ffffde;
     margin-bottom: 10px;
 }
 
-.textfield > input::placeholder {
+.textfield>input::placeholder {
     color: #f0ffffde;
 }
 
@@ -192,14 +197,19 @@ body * {
 
 /* light-mode.css */
 body.light-mode {
-    background-color: #ffffff; /* Fundo branco */
-    color: #000000; /* Texto preto */
+    background-color: #ffffff;
+    /* Fundo branco */
+    color: #000000;
+    /* Texto preto */
 }
 
 .body.light-mode .btn-login {
-    background-color: #000000; /* Fundo preto para o botão */
-    color: #ffffff; /* Texto branco para o botão */
+    background-color: #000000;
+    /* Fundo preto para o botão */
+    color: #ffffff;
+    /* Texto branco para o botão */
 }
+
 /* light-mode.css/caso de erro */
 
 /* Adicione estilos específicos para o modo claro */
@@ -207,7 +217,7 @@ body.light-mode {
     background-color: #ffffff;
 }
 
-.light-mode .left-login > h1 {
+.light-mode .left-login>h1 {
     color: #000000;
 }
 
@@ -216,21 +226,21 @@ body.light-mode {
     color: #000000;
 }
 
-.light-mode .card-login >h1 {
+.light-mode .card-login>h1 {
     background: #ffffff;
     color: #000000;
 }
 
-.light-mode .textfield > input {
+.light-mode .textfield>input {
     background: #ffffff;
     color: #000000;
 }
 
-.light-mode .textfield > label {
+.light-mode .textfield>label {
     color: #000000;
 }
 
-.light-mode .textfield > input::placeholder {
+.light-mode .textfield>input::placeholder {
     color: #000000;
 }
 
@@ -276,34 +286,210 @@ body.light-mode {
     border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: #00ff88;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     transform: translateX(26px);
 }
 
 /* Estilo para o botão switch */
 .switch {
     display: inline-block;
-    position: fixed; /* Tornar o botão fixo na tela */
-    top: 10px; /* Distância do topo */
-    right: 10px; /* Distância da direita */
-    z-index: 999; /* Certifique-se de que o botão esteja na parte superior */
+    position: fixed;
+    /* Tornar o botão fixo na tela */
+    top: 10px;
+    /* Distância do topo */
+    right: 10px;
+    /* Distância da direita */
+    z-index: 999;
+    /* Certifique-se de que o botão esteja na parte superior */
 }
 
 .left-login-image {
     width: 35vw;
     height: 73vh;
     background-repeat: no-repeat;
-    background-image:url("../assets/cara_do_login_dark.svg") ;
+    background-image: url("../assets/cara_do_login_dark.svg");
 
 }
 
 .light-mode .left-login-image {
-    background-image:url("../assets/cara_do_login_light.svg") ;
+    background-image: url("../assets/cara_do_login_light.svg");
 
 }
 
+.Modal {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
 
+.modal-content {
+    position: relative;
+    /* Garante que o botão de fechar fique relativo ao modal */
+    background: #2f2841;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    /* Ajuste conforme necessário */
+    right: 10px;
+    /* Ajuste conforme necessário */
+    outline: none;
+    transition: transform 0.3s ease-out;
+}
+
+.btn-close:hover {
+    transform: scale(1.1);
+    /* Efeito de escala ao passar o mouse */
+}
+
+.btn-close::after {
+    content: '\00D7';
+    /* Caractere X para o ícone de fechar */
+}
+
+.btn-primary {
+    --bs-btn-border-color: none;
+}
+
+.btn {
+    padding: 3%;
+
+}
+
+.modal-header {
+    color: #00ff88;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.modal-title {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.modal-body {
+    padding: 30px 0;
+}
+
+.modal-footer {
+    border-top: none;
+    padding-top: 20px;
+}
+
+.modal-body {
+    height: 100%;
+    margin: 0;
+    padding: none;
+    width: 100%;
+}
+
+.safado {
+    color: #000000;
+    background-color: #00ff88;
+    transition: border-color 0.25s;
+    text-transform: uppercase;
+    font-weight: 600;
+   
+}
+
+.safada {
+    color: #000000;
+    background-color: #00ff88;
+    transition: border-color 0.25s;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.safado:hover {
+    background-color: #00ff886b;
+    color: #d1caca;
+}
+
+.safada:hover {
+    background-color: #00ff886b;
+    color: #d1caca;
+}
+
+
+/* Estilos para o modal no modo claro */
+.light-mode .modal-content {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .btn-close {
+    color: #000000;
+
+}
+
+.light-mode .btn-close:hover {
+    transform: scale(1.1);
+    color: #f50606;
+}
+
+.light-mode .btn-close::after {
+    content: '\00D7';
+}
+
+
+.light-mode .modal-header {
+    color: #000000;
+}
+
+.light-mode .modal-title {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.light-mode .modal-body {
+    color: #000000;
+}
+
+.light-mode .modal-footer {
+    border-top: none;
+    padding-top: 20px;
+}
+
+.light-mode .safado {
+    color: #ffffff;
+    background-color: #000000;
+    transition: border-color 0.25s;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.light-mode .safada {
+    color: #ffffff;
+    background-color: #000000;
+    transition: border-color 0.25s;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.light-mode .safado:hover {
+    background-color: #2726266b;
+    color: #1a1919;
+}
+
+.light-mode .safada:hover {
+    background-color: #2726266b;
+    color: #1a1919;
+}
