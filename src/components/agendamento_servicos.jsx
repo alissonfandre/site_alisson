@@ -3,15 +3,15 @@ import { api } from "../config_axios";
 import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import React from 'react';
 
 const AgendamentoServicos = () => {
     const { register, handleSubmit, reset, watch } = useForm();
-    const [aviso, setAviso] = useState("");
+    const [aviso, setAviso] = useState(""); // Estado para controlar o aviso
     const [selectedDate, setSelectedDate] = React.useState(null);
     const [selectedTime, setSelectedTime] = useState("00:00");
-    const [servicos, setServicos] = useState([]);
+    const [servicos, setServicos] = useState(null); // Inicializando com null
     const [prestadores, setPrestadores] = useState([]);
     const [selectedServicoNome, setSelectedServicoNome] = useState("");
     const [inputDate, setInputDate] = React.useState('');
@@ -20,14 +20,22 @@ const AgendamentoServicos = () => {
         const fetchServicos = async () => {
             try {
                 const response = await api.get("/servico");
-                setServicos(response.data);
+                if (Array.isArray(response.data)) {
+                    setServicos(response.data);
+                    console.log("servicos:"+response.data)
+                } else {
+                    console.error("API retornou dados não-array para servicos:", response.data);
+                    // Tratar resposta inesperada conforme necessário
+                }
             } catch (error) {
                 console.error("Erro ao buscar serviços", error);
+                // Lidar com o erro de busca de serviços
             }
         };
 
         fetchServicos();
     }, []);
+
 
     const buscarPrestadoresPorNomeServico = async (servicoNome) => {
         if (!servicoNome) return;
@@ -44,54 +52,45 @@ const AgendamentoServicos = () => {
     const handleServicoChange = (event) => {
         console.log("Event target value:", event.target.value);
         console.log("Servicos array:", servicos); // Log do array servicos
-    
-         const servicoEncontrado = servicos.find(servico => servico.servico_id === parseInt(event.target.value, 10));        
-         console.log("Servico encontrado:", servicoEncontrado); // Log do serviço encontrado
-    
+
+        const servicoEncontrado = servicos.find(servico => servico.servico_id === parseInt(event.target.value, 10));
+        console.log("Servico encontrado:", servicoEncontrado); // Log do serviço encontrado
+
         const servicoNome = servicoEncontrado?.servico_nome;
         console.log("Servico Nome:", servicoNome);
-    
+
         setSelectedServicoNome(event.target.value);
-        
+
         buscarPrestadoresPorNomeServico(event.target.value);
     };
 
+    const formatarData = (data) => {
+        const partes = data.split('/');
+        if (partes.length === 3) {
+            const [dia, mes, ano] = partes;
+            return `${ano}-${mes}-${dia}`;
+        }
+        return data;
+    };
 
     const salvar = async (campos) => {
         try {
             // Adiciona os campos agendamento_hora e agendamento_servico_id ao objeto campos
             const camposCompletos = {
-                 ...campos,
+                ...campos,
                 agendamento_hora: selectedTime,
-                agendamento_data: "2024-05-09",
-                servico:{
-                    
-                    servico_id:watch("agendamento_servico_id")
+                agendamento_data: formatarData(inputDate), // Utiliza a função formatarData aqui
+                servico: {
+                    servico_id: watch("agendamento_servico_id")
                 }
-               
-
-                // agendamento_hora: selectedTime,
-                // agendamento_servico_id: { servico_id: watch("servico_id") },
-                // agendamento_usuario_id: { usuario_id : 1},
-                // agendamento_observacao: 'leite'
-    //             "agendamento_data": "2024-05-09",
-    // "agendamento_hora": "22:00",
-    // "agendamento_observacao":"bunda",
-    // "agendamento_status":"PENDENTE",
-    // "agendamento_usuario_id":{
-    //     "usuario_id": 1
-    // },
-    // "agendamento_servico_id":{
-    //     "servico_id": 2
-    // }
             };
 
-            console.log("camposCompletos"+camposCompletos);
+            console.log("camposCompletos", camposCompletos);
             const response = await api.post("/agendamento", camposCompletos);
-            setAviso("Agendamento realizado com sucesso!");
+            setAviso("Agendamento realizado com sucesso!"); // Define o aviso de sucesso
             reset();
         } catch (error) {
-            setAviso("Erro ao realizar agendamento!");
+            setAviso("Erro ao realizar agendamento!"); // Define o aviso de erro
         }
     };
 
@@ -116,9 +115,11 @@ const AgendamentoServicos = () => {
 
     return (
         <>
-            <Helmet>
-                <title>Agendamento</title>
-            </Helmet>
+            <HelmetProvider>
+                <Helmet>
+                    <title>Agendamento</title>
+                </Helmet>
+            </HelmetProvider>
 
             <div className="agendamento-container">
                 <div className="agendamento-form">
@@ -152,14 +153,13 @@ const AgendamentoServicos = () => {
                                 onChange={handleServicoChange}
                             >
                                 <option value="" disabled>Selecione um serviço</option>
-                                {servicos.map(servico => (
+                                {Array.isArray(servicos) && servicos.map(servico => (
                                     <option key={servico.servico_id} value={servico.servico_id}>{servico.servico_nome}</option>
                                 ))}
                             </select>
                         </label>
 
                         <label>
-
                             <select
                                 className="agendamento-select"
                                 aria-label="Selecionar Prestador"
@@ -189,9 +189,7 @@ const AgendamentoServicos = () => {
                                     placeholderText="dd/mm/yyyy"
                                     className="agendamento-input"
                                 />
-
                             </div>
-
                         </label>
 
                         <label>
@@ -213,18 +211,20 @@ const AgendamentoServicos = () => {
 
                     </form>
 
-                    <div className="agendamento-alert">{aviso}</div>
+                    {/* Mostra o aviso apenas se houver conteúdo em 'aviso' */}
+                    {aviso && (
+                        <div className="agendamento-alert">
+                            {aviso}
+                        </div>
+                    )}
 
                 </div>
-
 
                 <section className="images">
                     <img src={'cara da lupa.svg'} alt="Mobile" />
                     <div className="circle"></div>
                 </section>
-
             </div>
-
         </>
     );
 };

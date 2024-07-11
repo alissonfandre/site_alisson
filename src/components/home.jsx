@@ -24,7 +24,7 @@ const Home = () => {
       </nav>
 
       <aside className={menuActive ? 'active' : ''}>
-        <Link to="/">Inicio</Link>
+        <Link to="/">Tela de login</Link>
         <Link to="/agendar">Agendar Serviço</Link>
         <Link to="/agendado">Serviços agendados</Link>
       </aside>
@@ -41,12 +41,12 @@ const Home = () => {
       </figure>
 
       <figure style={{ "--c": "#fff5" }}>
-        <img src="https://picsum.photos/id/475/250/300" alt="Mountains" />
-        <figcaption>Yasmin bolla</figcaption>
+        <img src={"agend.svg"} alt="Mountains" />
+        <figcaption>Não sei ainda</figcaption>
       </figure>
 
       <figure style={{ "--c": "#fff5" }}>
-        <img src="https://picsum.photos/id/475/250/300" alt="Mountains" />
+        <img src={"agend.svg"} alt="Mountains" />
         <figcaption>Agenda</figcaption>
       </figure>
         
