@@ -35,19 +35,19 @@ const Home = () => {
 
       <div className="figure">
 
-      <figure>
-        <img src="https://picsum.photos/id/287/250/300" alt="Mountains" />
-        <figcaption>Serviços</figcaption>
+      <figure style={{ "--c": "#fff5" }}>
+        <img src={"vendo.svg"} alt="Mountains" />
+        <figcaption>Agenda</figcaption>
       </figure>
 
       <figure style={{ "--c": "#fff5" }}>
-        <img src={"agend.svg"} alt="Mountains" />
+        <img  src={"agend.svg"} alt="Mountains" />
         <figcaption>Não sei ainda</figcaption>
       </figure>
 
       <figure style={{ "--c": "#fff5" }}>
-        <img src={"agend.svg"} alt="Mountains" />
-        <figcaption>Agenda</figcaption>
+        <img src={"service.svg"} alt="Mountains" />
+        <figcaption>Serviços</figcaption>
       </figure>
         
         

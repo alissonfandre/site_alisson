@@ -13,6 +13,7 @@ import './css/cadastro.css';
 import './css/prestador.css';
 import './css/agendar.css';
 import './css/home.css';
+import './css/navbar.css';
 
 
 

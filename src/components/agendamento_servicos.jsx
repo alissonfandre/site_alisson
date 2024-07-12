@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import React from 'react';
+import feather from 'feather-icons';
 
 const AgendamentoServicos = () => {
     const { register, handleSubmit, reset, watch } = useForm();
@@ -22,7 +23,7 @@ const AgendamentoServicos = () => {
                 const response = await api.get("/servico");
                 if (Array.isArray(response.data)) {
                     setServicos(response.data);
-                    console.log("servicos:"+response.data)
+                    console.log("servicos:" + response.data)
                 } else {
                     console.error("API retornou dados não-array para servicos:", response.data);
                     // Tratar resposta inesperada conforme necessário
@@ -35,7 +36,6 @@ const AgendamentoServicos = () => {
 
         fetchServicos();
     }, []);
-
 
     const buscarPrestadoresPorNomeServico = async (servicoNome) => {
         if (!servicoNome) return;
@@ -113,6 +113,11 @@ const AgendamentoServicos = () => {
         setSelectedDate(date);
     };
 
+    useEffect(() => {
+        feather.replace(); // Atualiza ícones do Feather Icons após o carregamento do componente
+    }, []);
+
+
     return (
         <>
             <HelmetProvider>
@@ -124,6 +129,7 @@ const AgendamentoServicos = () => {
             <div className="agendamento-container">
                 <div className="agendamento-form">
                     <h4 className="agendamento-title">Agendamento</h4>
+
 
                     <form onSubmit={handleSubmit(salvar)}>
 
@@ -224,7 +230,43 @@ const AgendamentoServicos = () => {
                     <img src={'cara da lupa.svg'} alt="Mobile" />
                     <div className="circle"></div>
                 </section>
+
+                <div className="navbar">
+                    <nav>
+                        <ul className="navbar__menu">
+                            <li className="navbar__item">
+                                <a href="#" className="navbar__link"><i data-feather="home"></i><span>Home</span></a>
+                            </li>
+                            <li className="navbar__item">
+                                <a href="#" className="navbar__link"><i data-feather="message-square"></i><span>Messages</span></a>
+                            </li>
+                            <li className="navbar__item">
+                                <a href="#" className="navbar__link"><i data-feather="users"></i><span>Customers</span></a>
+                            </li>
+                            <li className="navbar__item">
+                                <a href="#" className="navbar__link"><i data-feather="folder"></i><span>Projects</span></a>
+                            </li>
+                            <li className="navbar__item">
+                                <a href="#" className="navbar__link"><i data-feather="archive"></i><span>Resources</span></a>
+                            </li>
+                            <li className="navbar__item">
+                                <a href="#" className="navbar__link"><i data-feather="help-circle"></i><span>Help</span></a>
+                            </li>
+                            <li className="navbar__item">
+                                <a href="#" className="navbar__link"><i data-feather="settings"></i><span>Settings</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+
+
+
+
             </div>
+
+
+
         </>
     );
 };
