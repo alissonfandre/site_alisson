@@ -1,112 +1,122 @@
 /* Variáveis CSS Custom Properties */
 :root {
-    --borderRadius: 10px;
-    --spacer: 1rem;
-    --primary: #09b363;
-    --text: #6a778e;
-    --linkHeight: calc(var(--spacer) * 3.5);
-    --timing: 250ms;
-  }
-  
-  /* Mixin de Keyframes */
-  @keyframes gooeyEffect {
-    0% {
+  --borderRadius: 10px;
+  --spacer: 1rem;
+  --primary: #09b363;
+  --text: #6a778e;
+  --linkHeight: calc(var(--spacer) * 3.5);
+  --timing: 250ms;
+}
+
+/* Mixin de Keyframes */
+@keyframes gooeyEffect {
+  0% {
       transform: scale(1, 1);
-    }
-    50% {
+  }
+  50% {
       transform: scale(0.5, 1.5);
-    }
-    100% {
+  }
+  100% {
       transform: scale(1, 1);
-    }
   }
-  
-  /* Importação de Fonte */
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
-  
-  /* Estilos da Navbar */
-  .navbar {
-    position: left;
-    top: var(--spacer);
-    left: 15rem;
-    background: #514869;
-    border-radius: var(--borderRadius);
-    padding: var(--spacer) 0;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
-    height: calc(100vh - calc(var(--spacer) * 4));
-  }
-  
-  /* Estilos dos Links na Navbar */
-  .navbar__link {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--linkHeight);
-    width: calc(var(--spacer) * 5.5);
-    color: var(--text);
-    transition: var(--timing) ease all;
-  }
-  
-  /* Estilos do Texto ao Lado do Link */
-  .navbar__link span {
-    position: absolute;
-    left: 100%; /* Posiciona à direita */
-    transform: translate(calc(-1 * var(--spacer) * 3));
-    margin-left: 1rem;
-    opacity: 0;
-    pointer-events: none;
-    color: var(--primary);
-    background: #484255;
-    padding: calc(var(--spacer) * 0.75);
-    transition: var(--timing) ease all;
-    border-radius: calc(var(--borderRadius) * 1.75);
-  }
-  
-  /* Estilos de Hover */
-  .navbar__link:hover {
-    color: #09b363;
-  }
-  
-  .navbar:not(:hover) .navbar__link:focus,
-  .navbar__link:hover {
-    span {
+}
+
+/* Importação de Fonte */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+
+/* Estilos para ocultar o marcador de lista */
+.navbar ul,
+.navbar li {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+/* Estilos da Navbar */
+.navbar {
+  position: fixed;
+  top: 50%; /* Centraliza verticalmente */
+  transform: translateY(-50%);
+  left: 94%; /* Ajusta a posição para a direita */
+  width: calc(var(--spacer) * 5.5);
+  background: #514869;
+  border-radius: var(--borderRadius);
+  padding: 30px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.356);
+  z-index: 1000; /* Z-index alto para garantir visibilidade */
+}
+
+/* Estilos dos Links na Navbar */
+.navbar__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--linkHeight);
+  color: var(--text);
+  transition: var(--timing) ease all;
+}
+
+/* Estilos do Texto ao Lado do Link */
+.navbar__link span {
+  position: absolute;
+  left: 100%; /* Posiciona à direita */
+  transform: translate(calc(-1 * var(--spacer) * 3));
+  margin-left: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  color: var(--primary);
+  background: #484255;
+  padding: calc(var(--spacer) * 0.75);
+  transition: var(--timing) ease all;
+  border-radius: calc(var(--borderRadius) * 1.75);
+}
+
+/* Estilos de Hover */
+.navbar__link:hover {
+  color: #09b363;
+}
+
+.navbar:not(:hover) .navbar__link:focus,
+.navbar__link:hover {
+  span {
+     left: -500%;
       opacity: 1;
-      transform: translate(0);
-    }
+      transform: translate(1);
+      margin-left: 2rem;
   }
-  
-  /* Estilos do Pseudo-elemento Antes do Último Item */
-  .navbar__item:last-child:before {
-    content: '';
-    position: absolute;
-    opacity: 0;
-    z-index: -1;
-    top: 0;
-    right: var(--spacer); /* Ajuste para a direita */
-    width: var(--linkHeight);
-    height: var(--linkHeight);
-    background: var(--primary);
-    border-radius: calc(var(--borderRadius) * 1.75);
-    transition: var(--timing) cubic-bezier(1, 0.2, 0.1, 1.2) all;
-  }
-  
-  /* Efeitos de Hover com Loop */
-  @for $i from 1 to 12 {
-    .navbar__item:first-child:nth-last-child(#{$i}),
-    .navbar__item:first-child:nth-last-child(#{$i}) ~ .navbar__item {
+}
+
+/* Estilos do Pseudo-elemento Antes do Último Item */
+.navbar__item:last-child:before {
+  content: '';
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  top: 0;
+  right: var(--spacer); /* Ajuste para a direita */
+  width: var(--linkHeight);
+  height: var(--linkHeight);
+  background: #fff;
+  border-radius: calc(var(--borderRadius) * 1.75);
+  transition: var(--timing) cubic-bezier(1, 0.2, 0.1, 1.2) all;
+}
+
+/* Efeitos de Hover com Loop */
+@for $i from 1 to 12 {
+  .navbar__item:first-child:nth-last-child(#{$i}),
+  .navbar__item:first-child:nth-last-child(#{$i}) ~ .navbar__item {
       &:hover {
-        ~ .navbar__item:last-child:before {
-          opacity: 1;
-        }
+          ~ .navbar__item:last-child:before {
+              opacity: 1;
+          }
       }
       &:nth-child(#{$i}):hover {
-        ~ .navbar__item:last-child:before {
-          @include gooeyEffect;
-          top: calc(100% / #{$i} * (#{$i} - 1));
-          animation: gooeyEffect var(--timing) 1;
-        }
+          ~ .navbar__item:last-child:before {
+              @include gooeyEffect;
+              top: calc(100% / #{$i} * (#{$i} - 1));
+              animation: gooeyEffect var(--timing) 1;
+          }
       }
-    }
   }
-  
+}
